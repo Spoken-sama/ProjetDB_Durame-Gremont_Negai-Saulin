@@ -178,11 +178,19 @@ Enfin, le MCD devra intégrer les données retenues dans le dictionnaire et repr
 ## 7. MLD
 
 Hotels = (id_pk INT, adresse VARCHAR(50), Nom VARCHAR(50), numérotel VARCHAR(50), mail VARCHAR(50), nombreétoiles INT);
+
 Chambre = (numéro INT, étage INT, type VARCHAR(50), état VARCHAR(50), accesibilité LOGICAL, libre VARCHAR(50), #id_pk);
+
 Employé = (id INT, fonction VARCHAR(50), Horraire VARCHAR(50), mail VARCHAR(50), nom_prénom VARCHAR(50), tel INT, date_début_contrat VARCHAR(50), date_fin_contrat VARCHAR(50), #id_1, #idpk);
+
 Prestation = (id VARCHAR(50), type VARCHAR(50), description VARCHAR(50), prix CURRENCY);
+
 Incident = (id INT, type INT, description VARCHAR(50), état VARCHAR(50), criticité INT, #id_1);
+
 Client = (id VARCHAR(50), nom_prénom VARCHAR(50), mail VARCHAR(50), tel INT, cartefidélité LOGICAL, #numéro*, #id*);
+
 Réservation = (numéro_reservation VARCHAR(50), date_arrivé VARCHAR(50), date_départ VARCHAR(50), nombre_personne VARCHAR(50), côut_chambre CURRENCY, réglé LOGICAL, #(id, nom_prénom));
+
 Subit = (#numéro, #id);
+
 Concerne = (#numéro, #numéro_reservation);
