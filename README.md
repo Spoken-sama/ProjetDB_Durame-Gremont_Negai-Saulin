@@ -1,4 +1,4 @@
-# Projet MERISE — Gestion d'une chaîne hôtelière
+<img width="4032" height="2016" alt="image" src="https://github.com/user-attachments/assets/e63a0c86-780a-4067-9f0f-f6afc7cadc24" /># Projet MERISE — Gestion d'une chaîne hôtelière
 
 ## 1. Prompt utilisé
 
@@ -194,3 +194,22 @@ Réservation = (numéro_reservation VARCHAR(50), date_arrivé VARCHAR(50), date_
 Subit = (#numéro, #id);
 
 Concerne = (#numéro, #numéro_reservation);
+
+---
+
+## 8. Scénario d'utilisation
+
+La base de données est utilisée par le directeur d’exploitation du réseau hôtelier Ibis dans le cadre de la préparation du bilan de fin d’année 2026 et de la campagne de fidélisation des clients.
+
+L’objectif est d’exploiter les données enregistrées dans la base afin d’obtenir différents indicateurs de gestion :
+- Identifier les hôtels les plus performants
+- Analyser les réservations réalisées au cours de l’année
+- Mesurer le chiffre d’affaires généré
+- Identifier les clients les plus fidèles
+- Détecter les réservations non réglées
+- Analyser le taux d’occupation des chambres
+- Etudier les prestations proposées aux clients
+- Suivre la répartition des employés et leur organisation hiérarchique
+- 
+Les requêtes SQL développées dans le fichier 4_interrogation.sql permettent de répondre à ces besoins décisionnels
+
