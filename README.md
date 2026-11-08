@@ -1,4 +1,4 @@
-<img width="4032" height="2016" alt="image" src="https://github.com/user-attachments/assets/e63a0c86-780a-4067-9f0f-f6afc7cadc24" /># Projet MERISE — Gestion d'une chaîne hôtelière
+# Projet MERISE — Gestion d'une chaîne hôtelière
 
 ## 1. Prompt utilisé
 
