@@ -210,6 +210,78 @@ L’objectif est d’exploiter les données enregistrées dans la base afin d’
 - Analyser le taux d’occupation des chambres
 - Etudier les prestations proposées aux clients
 - Suivre la répartition des employés et leur organisation hiérarchique
-- 
+
 Les requêtes SQL développées dans le fichier 4_interrogation.sql permettent de répondre à ces besoins décisionnels
 
+---
+
+## 9. Etude d'un plan d'exécution
+
+### Requête étudiée
+
+SELECT c.nom_prenom, c.mail, r.date_arrive
+FROM Client c
+JOIN Reservation r ON r.id_client = c.id
+WHERE c.carte_fidelite = TRUE
+  AND r.regle = FALSE;
+
+Cette requête permet d'obtenir la liste des clients possédant une carte de fidélité et disposant d'une réservation non réglée
+
+Elle utilise trois opérateurs de l'algèbre relationnelle :
+- Sélection (σ)
+- Jointure (⋈)
+- Projection (π)
+
+Pour cet exemple, la base contient :
+- 20 clients
+- 25 réservations
+- 8 clients possédant une carte de fidélité
+- 5 réservations non réglées
+- 3 résultats obtenus par la requête
+
+#### 1er arbre relationnel (jointure avant filtres)
+
+π(nom_prenom, mail, date_arrive)              -> 3 lignes
+              |
+              |
+σ(carte_fidelite = TRUE ET regle = FALSE)     -> 3 lignes
+              |
+              |
+(Client ⋈ Reservation)                        -> 25 lignes
+             / \
+            /   \
+      Client    Réservation
+    20 lignes      25 lignes
+
+Jointure : 20*25 = 500 opérations
+Sélection : 25 opérations
+Projection : 3 opération
+
+Total : 528 opérations
+
+#### 2ème arbre relationnel (filtres avant jointure)
+
+π(nom_prenom, mail, date_arrive)              -> 3 lignes
+              |
+              ⋈                               -> 3 lignes
+              | - - - - - - - - - - - - - - - - - - - - - -
+              |                                           | 
+(σ(carte_fidelite = TRUE) -> 8 lignes          (σ(regle = FALSE) Reservation) -> 5 lignes
+              |                                           |
+           Client                                     Réservation
+          20 lignes                                    25 lignes
+
+Sélection Client : 20 opérations
+Sélection Reservation : 25 opérations
+Jointure : 8×5 = 40 opérations
+Projection : 3 opérations
+
+Total : 88 opérations
+
+#### Comparaison des arbres
+
+Dans le premier arbre, la jointure est réalisée avant l'application des filtres. Le système doit donc traiter les 25 lignes issues de la jointure avant de conserver les 3 lignes du résultat final
+
+Dans le deuxième arbre, les sélections sont appliquées avant la jointure. Les données sont réduites à 8 clients possédant une carte de fidélité et 5 réservations non réglées. La jointure travaille donc sur un plus petit nombre de données
+
+Les deux arbres produisent le même résultat final mais le deuxième est plus efficace. Le nombre d'opérations à effectuer est plus petit, ce qui donne de meilleures performances dans la requête
