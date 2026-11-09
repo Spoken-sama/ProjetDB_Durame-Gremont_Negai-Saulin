@@ -240,7 +240,7 @@ Pour cet exemple, la base contient :
 - 3 résultats obtenus par la requête
 
 #### 1er arbre relationnel (jointure avant filtres)
-
+```
 π(nom_prenom, mail, date_arrive)              -> 3 lignes
               |
               |
@@ -252,7 +252,7 @@ Pour cet exemple, la base contient :
             /   \
       Client    Réservation
     20 lignes      25 lignes
-
+```
 Jointure : 20*25 = 500 opérations
 Sélection : 25 opérations
 Projection : 3 opération
@@ -260,7 +260,7 @@ Projection : 3 opération
 Total : 528 opérations
 
 #### 2ème arbre relationnel (filtres avant jointure)
-
+```
 π(nom_prenom, mail, date_arrive)              -> 3 lignes
               |
               ⋈                               -> 3 lignes
@@ -270,7 +270,7 @@ Total : 528 opérations
               |                                           |
            Client                                     Réservation
           20 lignes                                    25 lignes
-
+```
 Sélection Client : 20 opérations
 Sélection Reservation : 25 opérations
 Jointure : 8×5 = 40 opérations
